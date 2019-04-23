@@ -1,1 +1,3 @@
-# TypeScript / Node Boilerplate
+# Tempest
+
+> An Open-source, Plug 'n' Play / CMS for blogging platforms.

@@ -1,6 +1,6 @@
 import express from "express";
 import bodyParser from "body-parser";
-import router from "./router";
+import Router from "./Router";
 
 class App {
   public app: express.Application;
@@ -13,7 +13,7 @@ class App {
     this.app.use(bodyParser.urlencoded({ extended: false }));
   }
   private applyRoutes(): void {
-    this.app.use("/api", router);
+    this.app.use("/api", Router);
   }
 }
 
