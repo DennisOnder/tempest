@@ -11,6 +11,7 @@ class App {
   }
   private applyMiddleware(): void {
     this.app.use(bodyParser.urlencoded({ extended: false }));
+    this.app.use(bodyParser.json());
   }
   private applyRoutes(): void {
     this.app.use("/api", Router);
