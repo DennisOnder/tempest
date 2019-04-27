@@ -7,7 +7,8 @@ const Database = new Sequelize({
   port: config.DB_PORT,
   name: config.DB_NAME,
   username: config.DB_USER,
-  password: config.DB_PASSWORD
+  password: config.DB_PASSWORD,
+  logging: false
 });
 
 function dbConnect() {
