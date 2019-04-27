@@ -21,6 +21,12 @@ class Router {
         AuthController.register(req, res);
       }
     );
+    this.router.post(
+      "/auth/login",
+      (req: express.Request, res: express.Response) => {
+        AuthController.login(req, res);
+      }
+    );
   }
 }
 

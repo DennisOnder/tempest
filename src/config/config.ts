@@ -7,6 +7,10 @@ const config = {
     process.env.NODE_ENV === "dev"
       ? CUSTOM_ENV_VARS.SERVER_PORT
       : process.env.SERVER_PORT,
+  SECRET_OR_KEY:
+    process.env.NODE_ENV === "dev"
+      ? CUSTOM_ENV_VARS.SECRET_OR_KEY
+      : process.env.SECRET_OR_KEY,
   DB_HOST:
     process.env.NODE_ENV === "dev"
       ? CUSTOM_ENV_VARS.DB_HOST

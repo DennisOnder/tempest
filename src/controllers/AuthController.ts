@@ -1,8 +1,12 @@
+// tslint:disable: no-shadowed-variable
 import { Request, Response } from "express";
 import IRegistrationRequest from "../interfaces/IRegistrationRequest";
+import ILoginRequest from "../interfaces/ILoginRequest";
 import InputValidation from "../utils/InputValidation";
 import bcrypt from "bcrypt";
 import { User } from "../models/user.model";
+import jsonwebtoken from "jsonwebtoken";
+import config from "../config/config";
 
 class AuthController {
   public register(req: Request, res: Response) {
@@ -37,6 +41,36 @@ class AuthController {
         .catch(err => console.error(err));
     } else {
       res.status(400).json(inputErrors);
+    }
+  }
+  public async login(req: Request, res: Response) {
+    try {
+      const data: ILoginRequest = {
+        email: req.body.email,
+        password: req.body.password
+      };
+      const inputErrors = await InputValidation.login(data);
+      if (!inputErrors) {
+        const user = await User.findOne({ where: { email: data.email } });
+        bcrypt.compare(data.password, user.password, (err, match) => {
+          if (match) {
+            const payload = {
+              id: user.id,
+              email: user.email
+            };
+            jsonwebtoken.sign(
+              payload,
+              config.SECRET_OR_KEY,
+              { expiresIn: "24h" },
+              (err, token) => {
+                res.status(200).json({ success: true, token });
+              }
+            );
+          }
+        });
+      }
+    } catch (err) {
+      res.status(400).json(err);
     }
   }
 }

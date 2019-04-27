@@ -1,7 +1,7 @@
 import { Sequelize } from "sequelize-typescript";
 import config from "../config/config";
 
-export const Database = new Sequelize({
+const Database = new Sequelize({
   dialect: "postgres",
   host: config.DB_HOST,
   port: config.DB_PORT,
@@ -9,3 +9,13 @@ export const Database = new Sequelize({
   username: config.DB_USER,
   password: config.DB_PASSWORD
 });
+
+function dbConnect() {
+  Database.authenticate()
+    .then(() => console.log("Database connection established."))
+    .catch(err => console.error("Database connection error: ", err));
+  // FIXME: => Database sync
+  Database.sync({ logging: false });
+}
+
+export { Database, dbConnect };

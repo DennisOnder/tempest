@@ -1,28 +1,46 @@
 import validator from "validator";
 import IRegistrationRequest from "../interfaces/IRegistrationRequest";
+import ILoginRequest from "../interfaces/ILoginRequest";
 
 class InputValidation {
   public register(data: IRegistrationRequest) {
     // tslint:disable-next-line
-    let errors: any = {};
+    let error: any = {};
     if (validator.isEmpty(data.email)) {
-      errors.emptyEmail = "An email address is required.";
+      error.emptyEmail = "An email address is required.";
     }
     if (validator.isEmpty(data.password)) {
-      errors.emptyPassword = "A password is required.";
+      error.emptyPassword = "A password is required.";
     }
     if (!validator.isEmail(data.email)) {
-      errors.invalidEmail = "A valid email address is required.";
+      error.invalidEmail = "A valid email address is required.";
     }
     if (!validator.isLength(data.password, { min: 8, max: 24 })) {
-      errors.passwordLength =
+      error.passwordLength =
         "Your password should be between 8 and 24 characters long.";
     }
     if (data.password !== data.confirmPassword) {
-      errors.passwordsNotMatching = "Your passwords are not matching.";
+      error.passwordsNotMatching = "Your passwords are not matching.";
     }
-    if (Object.keys(errors).length > 0) {
-      return errors;
+    return this.checkForErrors(error);
+  }
+  public login(data: ILoginRequest) {
+    // tslint:disable-next-line
+    let error: any = {};
+    if (validator.isEmpty(data.email)) {
+      error.emptyEmail = "An email address is required.";
+    }
+    if (validator.isEmpty(data.password)) {
+      error.emptyPassword = "A password is required.";
+    }
+    if (!validator.isEmail(data.email)) {
+      error.invalidEmail = "A valid email address is required.";
+    }
+    return this.checkForErrors(error);
+  }
+  private checkForErrors(errObject) {
+    if (Object.keys(errObject).length > 0) {
+      return errObject;
     } else {
       return false;
     }
