@@ -64,7 +64,9 @@ class AuthController {
                 config.SECRET_OR_KEY,
                 { expiresIn: "24h" },
                 (err, token) => {
-                  return res.status(200).json({ success: true, token });
+                  return res
+                    .status(200)
+                    .json({ success: true, token: `Bearer ${token}` });
                 }
               );
             }
@@ -77,6 +79,20 @@ class AuthController {
       }
     } catch (err) {
       return res.status(400).json(err);
+    }
+  }
+  public async current(req: Request, res: Response) {
+    try {
+      const user = await User.findOne({ where: { id: req.user.id } });
+      const payload = {
+        id: user.id,
+        email: user.email,
+        createdAt: user.createdAt,
+        updatedAt: user.updatedAt
+      };
+      res.status(200).json(payload);
+    } catch (err) {
+      console.error(err);
     }
   }
 }

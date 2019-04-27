@@ -2,6 +2,7 @@ import express from "express";
 import bodyParser from "body-parser";
 import Router from "./Router";
 import config from "./config/config";
+import PassportConfig from "./config/PassportConfig";
 
 class App {
   public app: express.Application;
@@ -23,6 +24,7 @@ class App {
   private applyMiddleware(): void {
     this.app.use(bodyParser.urlencoded({ extended: false }));
     this.app.use(bodyParser.json());
+    PassportConfig.init(this.app);
   }
   private applyRoutes(): void {
     this.app.use("/api", Router);

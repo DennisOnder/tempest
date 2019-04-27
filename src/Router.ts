@@ -1,6 +1,7 @@
 import express from "express";
 import AuthController from "./controllers/AuthController";
 import IRegistrationRequest from "./interfaces/IRegistrationRequest";
+import passport = require("passport");
 
 class Router {
   public router;
@@ -25,6 +26,13 @@ class Router {
       "/auth/login",
       (req: express.Request, res: express.Response) => {
         AuthController.login(req, res);
+      }
+    );
+    this.router.get(
+      "/auth/current",
+      passport.authenticate("jwt", { session: false }),
+      (req: express.Request, res: express.Response) => {
+        AuthController.current(req, res);
       }
     );
   }
