@@ -1,6 +1,7 @@
 import validator from "validator";
 import IRegistrationRequest from "../interfaces/IRegistrationRequest";
 import ILoginRequest from "../interfaces/ILoginRequest";
+import IPostRequest from "../interfaces/IPostRequest";
 
 class InputValidation {
   public register(data: IRegistrationRequest) {
@@ -35,6 +36,17 @@ class InputValidation {
     }
     if (!validator.isEmail(data.email)) {
       error.invalidEmail = "A valid email address is required.";
+    }
+    return this.checkForErrors(error);
+  }
+  public createPost(data: IPostRequest) {
+    // tslint:disable-next-line
+    let error: any = {};
+    if (validator.isEmpty(data.title)) {
+      error.emptyTitle = "A title is required.";
+    }
+    if (validator.isEmpty(data.body)) {
+      error.emptyPost = "Empty posts are not allowed.";
     }
     return this.checkForErrors(error);
   }

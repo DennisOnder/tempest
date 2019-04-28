@@ -1,6 +1,6 @@
 import express from "express";
 import AuthController from "./controllers/AuthController";
-import IRegistrationRequest from "./interfaces/IRegistrationRequest";
+import PostController from "./controllers/PostController";
 import passport = require("passport");
 
 class Router {
@@ -9,6 +9,7 @@ class Router {
     this.router = express.Router();
     this.test();
     this.auth();
+    this.post();
   }
   private test(): void {
     this.router.get("/test", (req: express.Request, res: express.Response) =>
@@ -33,6 +34,15 @@ class Router {
       passport.authenticate("jwt", { session: false }),
       (req: express.Request, res: express.Response) => {
         AuthController.current(req, res);
+      }
+    );
+  }
+  private post(): void {
+    this.router.post(
+      "/posts/create",
+      passport.authenticate("jwt", { session: false }),
+      (req: express.Request, res: express.Response) => {
+        PostController.create(req, res);
       }
     );
   }
