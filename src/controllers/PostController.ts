@@ -20,6 +20,7 @@ class PostController {
         const newPost = await new Post(post);
         // tslint:disable-next-line: no-shadowed-variable
         newPost.save().then(post => res.status(200).json(post));
+        console.log(`Post ${post.handle} has been created.`);
       } else {
         res.status(400).json(inputErrors);
       }
@@ -66,6 +67,7 @@ class PostController {
             })
             // tslint:disable-next-line: no-shadowed-variable
             .then(post => res.status(200).json(post));
+          console.log(`Post ${post.handle} has been updated.`);
         } else {
           res.status(404).json({ error: "Post not found." });
         }
@@ -87,6 +89,7 @@ class PostController {
         .then(() =>
           res.status(200).json({ success: true, timestamp: Date.now() })
         );
+      console.log(`Post ${post.handle} has been removed.`);
     } else {
       res.status(404).json({ error: "Post not found." });
     }
