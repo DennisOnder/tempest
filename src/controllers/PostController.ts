@@ -67,7 +67,9 @@ class PostController {
             })
             // tslint:disable-next-line: no-shadowed-variable
             .then(post => res.status(200).json(post));
-          console.log(`Post ${post.handle} has been updated.`);
+          console.log(
+            `Post ${handle} has been updated. New handle: ${post.handle}.`
+          );
         } else {
           res.status(404).json({ error: "Post not found." });
         }

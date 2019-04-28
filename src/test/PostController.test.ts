@@ -9,7 +9,7 @@ const testUser: ILoginRequest = {
   password: "test1234"
 };
 
-const title = `A test post ${Math.floor(Math.random() * 10000)}.`;
+const title = `A test post ${Math.floor(Math.random() * 10000)}`;
 const testPost: IPostRequest = {
   user_id: 1,
   title,
@@ -24,7 +24,7 @@ const testPost: IPostRequest = {
 
 const updatedTitle = `An updated test post ${Math.floor(
   Math.random() * 10000
-)}.`;
+)}`;
 const updatedTestPost: IPostRequest = {
   user_id: 1,
   title: updatedTitle,

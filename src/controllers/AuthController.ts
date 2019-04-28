@@ -34,7 +34,7 @@ class AuthController {
                   .save()
                   .then(user => res.json(user))
                   .catch(err => console.error(err));
-                console.log(`User ${user.email} just registered.`);
+                console.log(`User ${data.email} just registered.`);
               });
             });
           }
