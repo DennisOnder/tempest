@@ -39,7 +39,7 @@ class InputValidation {
     }
     return this.checkForErrors(error);
   }
-  public createPost(data: IPostRequest) {
+  public post(data: IPostRequest) {
     // tslint:disable-next-line
     let error: any = {};
     if (validator.isEmpty(data.title)) {
