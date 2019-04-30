@@ -61,7 +61,7 @@ describe("Post Controller", () => {
         );
     });
   });
-  describe("Get", () => {
+  describe("Get Single Post", () => {
     it("should return the post as an object", async () => {
       const response = await callApi("get", `/posts/get/${testPost.handle}`);
       chai.expect(response.status).to.eq(200);
@@ -76,6 +76,16 @@ describe("Post Controller", () => {
           "createdAt",
           "updatedAt"
         );
+    });
+  });
+  describe("Get All Posts", () => {
+    it("should return the posts as an array", async () => {
+      const response = await callApi(
+        "get",
+        `/posts/get/user/${testPost.user_id}`
+      );
+      chai.expect(response.status).to.eq(200);
+      chai.assert.typeOf(response.data, "array");
     });
   });
   describe("Edit", () => {

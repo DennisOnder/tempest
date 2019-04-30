@@ -28,11 +28,21 @@ class PostController {
       res.status(400).json(err);
     }
   }
-  public async get(req: Request, res: Response) {
+  public async getPost(req: Request, res: Response) {
     try {
       const handle = req.params.handle;
       const post = await Post.findOne({ where: { handle } });
       res.status(200).json(post);
+    } catch (err) {
+      res.status(400).json(err);
+    }
+  }
+  public async getPostsViaUserId(req: Request, res: Response) {
+    try {
+      // tslint:disable-next-line: variable-name
+      const user_id = req.params.id;
+      const posts = await Post.findAll({ where: { user_id } });
+      res.status(200).json(posts);
     } catch (err) {
       res.status(400).json(err);
     }

@@ -44,7 +44,12 @@ class Router {
     this.router.get(
       "/posts/get/:handle",
       (req: express.Request, res: express.Response) =>
-        PostController.get(req, res)
+        PostController.getPost(req, res)
+    );
+    this.router.get(
+      "/posts/get/user/:id",
+      (req: express.Request, res: express.Response) =>
+        PostController.getPostsViaUserId(req, res)
     );
     this.router.put(
       "/posts/edit/:handle",
