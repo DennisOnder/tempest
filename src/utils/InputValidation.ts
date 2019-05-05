@@ -2,6 +2,7 @@ import validator from "validator";
 import IRegistrationRequest from "../interfaces/IRegistrationRequest";
 import ILoginRequest from "../interfaces/ILoginRequest";
 import IPostRequest from "../interfaces/IPostRequest";
+import IProfileRequest from "../interfaces/IProfileRequest";
 
 class InputValidation {
   public register(data: IRegistrationRequest) {
@@ -47,6 +48,25 @@ class InputValidation {
     }
     if (validator.isEmpty(data.body)) {
       error.emptyPost = "Empty posts are not allowed.";
+    }
+    return this.checkForErrors(error);
+  }
+  public profile(data: IProfileRequest) {
+    // tslint:disable-next-line
+    let error: any = {};
+    if (validator.isEmpty(data.firstName)) {
+      error.firstNameEmpty = "Your first name is required.";
+    }
+    if (validator.isEmpty(data.lastName)) {
+      error.lastNameEmpty = "Your last name is required.";
+    }
+    if (validator.isLength(data.firstName, { min: 3, max: 20 })) {
+      error.firstNameLength =
+        "Your first name should be more than 3 characters long.";
+    }
+    if (validator.isLength(data.lastName, { min: 3, max: 20 })) {
+      error.lastNameLength =
+        "Your last name should be more than 3 characters long.";
     }
     return this.checkForErrors(error);
   }
