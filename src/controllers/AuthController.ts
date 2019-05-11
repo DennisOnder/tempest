@@ -84,12 +84,11 @@ class AuthController {
   }
   public async current(req: Request, res: Response) {
     try {
-      const user = await User.findOne({ where: { id: req.user.id } });
       const payload = {
-        id: user.id,
-        email: user.email,
-        createdAt: user.createdAt,
-        updatedAt: user.updatedAt
+        id: req.user.id,
+        email: req.user.email,
+        createdAt: req.user.createdAt,
+        updatedAt: req.user.updatedAt
       };
       res.status(200).json(payload);
     } catch (err) {
