@@ -1,6 +1,7 @@
 import express from "express";
 import AuthController from "./controllers/AuthController";
 import PostController from "./controllers/PostController";
+import ProfileController from "./controllers/ProfileController";
 import passport = require("passport");
 
 class Router {
@@ -10,6 +11,7 @@ class Router {
     this.test();
     this.auth();
     this.post();
+    this.profile();
   }
   private test(): void {
     this.router.get("/test", (req: express.Request, res: express.Response) =>
@@ -62,6 +64,31 @@ class Router {
       passport.authenticate("jwt", { session: false }),
       (req: express.Request, res: express.Response) =>
         PostController.delete(req, res)
+    );
+  }
+  private profile(): void {
+    this.router.post(
+      "/profile/create",
+      passport.authenticate("jwt", { session: false }),
+      (req: express.Request, res: express.Response) =>
+        ProfileController.create(req, res)
+    );
+    this.router.get(
+      "/profile/get/:handle",
+      (req: express.Request, res: express.Response) =>
+        ProfileController.getProfile(req, res)
+    );
+    this.router.put(
+      "/profile/edit",
+      passport.authenticate("jwt", { session: false }),
+      (req: express.Request, res: express.Response) =>
+        ProfileController.editProfile(req, res)
+    );
+    this.router.delete(
+      "/profile/delete",
+      passport.authenticate("jwt", { session: false }),
+      (req: express.Request, res: express.Response) =>
+        ProfileController.deleteProfile(req, res)
     );
   }
 }

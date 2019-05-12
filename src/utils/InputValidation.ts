@@ -60,11 +60,11 @@ class InputValidation {
     if (validator.isEmpty(data.lastName)) {
       error.lastNameEmpty = "Your last name is required.";
     }
-    if (validator.isLength(data.firstName, { min: 3, max: 20 })) {
+    if (!validator.isLength(data.firstName, { min: 3, max: 20 })) {
       error.firstNameLength =
         "Your first name should be more than 3 characters long.";
     }
-    if (validator.isLength(data.lastName, { min: 3, max: 20 })) {
+    if (!validator.isLength(data.lastName, { min: 3, max: 20 })) {
       error.lastNameLength =
         "Your last name should be more than 3 characters long.";
     }
