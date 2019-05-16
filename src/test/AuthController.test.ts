@@ -17,6 +17,9 @@ const testUser: ILoginRequest = {
   password: "test1234"
 };
 
+// Response keys
+const responseKeys = ["id", "email", "createdAt", "updatedAt"];
+
 // Delete dummy account from the database once testing is done
 after(() => User.destroy({ where: { email: dummyAccount.email } }));
 
@@ -26,9 +29,7 @@ describe("Authentication Controller", () => {
       const result = await callApi("post", "/auth/register", dummyAccount);
       chai.expect(result.status).to.eq(200);
       chai.assert.typeOf(result.data, "object");
-      chai
-        .expect(result.data)
-        .to.have.all.keys("id", "email", "password", "createdAt", "updatedAt");
+      chai.expect(result.data).to.have.all.keys(...responseKeys, "password");
     });
   });
   describe("Login", () => {
@@ -51,9 +52,7 @@ describe("Authentication Controller", () => {
       );
       chai.expect(result.status).to.eq(200);
       chai.assert.typeOf(result.data, "object");
-      chai
-        .expect(result.data)
-        .to.have.all.keys("id", "email", "createdAt", "updatedAt");
+      chai.expect(result.data).to.have.all.keys(...responseKeys);
     });
   });
 });

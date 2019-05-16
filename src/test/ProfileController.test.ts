@@ -3,6 +3,7 @@ import callApi from "./callApi";
 import getToken from "./getToken";
 import IProfileRequest from "../interfaces/IProfileRequest";
 
+// Testing profiles
 const dummyProfile: IProfileRequest = {
   user_id: 1,
   firstName: "Test",
@@ -19,11 +20,26 @@ const updatedDummyProfile: IProfileRequest = {
   handle: "test-edit-222"
 };
 
+// Response keys
+const responseKeys = [
+  "id",
+  "user_id",
+  "firstName",
+  "lastName",
+  "biography",
+  "handle",
+  "createdAt",
+  "updatedAt"
+];
+
+// User token
+let token;
+beforeEach(async () => (token = await getToken()));
+
 describe("Profile Controller", () => {
   describe("Create Profile", () => {
     it("should return the profile as an object upon creation", async () => {
       try {
-        const token = await getToken();
         const result = await callApi(
           "post",
           "/profile/create",
@@ -32,18 +48,7 @@ describe("Profile Controller", () => {
         );
         chai.expect(result.status).to.eq(200);
         chai.expect(result.data).to.be.an("object");
-        chai
-          .expect(result.data)
-          .to.have.all.keys(
-            "id",
-            "user_id",
-            "firstName",
-            "lastName",
-            "biography",
-            "handle",
-            "createdAt",
-            "updatedAt"
-          );
+        chai.expect(result.data).to.have.all.keys(...responseKeys);
       } catch (error) {
         console.error(error);
       }
@@ -58,18 +63,7 @@ describe("Profile Controller", () => {
         );
         chai.expect(profile.status).to.eq(200);
         chai.expect(profile.data).to.be.an("object");
-        chai
-          .expect(profile.data)
-          .to.have.all.keys(
-            "id",
-            "user_id",
-            "firstName",
-            "lastName",
-            "biography",
-            "handle",
-            "createdAt",
-            "updatedAt"
-          );
+        chai.expect(profile.data).to.have.all.keys(...responseKeys);
       } catch (error) {
         console.error(error);
       }
@@ -78,7 +72,6 @@ describe("Profile Controller", () => {
   describe("Update Profile", () => {
     it("should return the updated profile as an object", async done => {
       try {
-        const token = await getToken();
         const result = await callApi(
           "put",
           "/profile/edit",
@@ -87,18 +80,7 @@ describe("Profile Controller", () => {
         );
         chai.expect(result.status).to.eq(200);
         chai.expect(result.data).to.be.an("object");
-        chai
-          .expect(result.data)
-          .to.have.all.keys(
-            "id",
-            "user_id",
-            "firstName",
-            "lastName",
-            "biography",
-            "handle",
-            "createdAt",
-            "updatedAt"
-          );
+        chai.expect(result.data).to.have.all.keys(...responseKeys);
         done();
       } catch (error) {
         console.error(error);
@@ -108,7 +90,6 @@ describe("Profile Controller", () => {
   describe("Delete Profile", () => {
     it("should return an object with a success prop and a timestamp", async () => {
       try {
-        const token = await getToken();
         const result = await callApi("delete", "/profile/delete", null, token);
         chai.expect(result.status).to.eq(200);
         chai.expect(result.data).to.be.an("object");
