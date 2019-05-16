@@ -1,6 +1,6 @@
 import chai from "chai";
-import callApi from "./callApi";
-import getToken from "./getToken";
+import callApi from "../utils/callApi";
+import getToken from "../utils/getToken";
 import IProfileRequest from "../interfaces/IProfileRequest";
 
 // Testing profiles

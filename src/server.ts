@@ -1,5 +1,5 @@
 import app from "./app";
-import { dbConnect } from "./db/Database";
+import { dbConnect } from "./config/Database";
 
 app.startServer();
 

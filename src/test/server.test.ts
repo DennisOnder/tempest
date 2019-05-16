@@ -1,5 +1,5 @@
 import { assert } from "chai";
-import callApi from "./callApi";
+import callApi from "../utils/callApi";
 
 describe("Test Route", () => {
   it("should return the test response", async () => {

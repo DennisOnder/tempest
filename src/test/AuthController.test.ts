@@ -1,7 +1,7 @@
 import chai from "chai";
 import IRegistrationRequest from "../interfaces/IRegistrationRequest";
 import ILoginRequest from "../interfaces/ILoginRequest";
-import callApi from "./callApi";
+import callApi from "../utils/callApi";
 import { User } from "../models/user.model";
 
 // Randomly generated account for registration testing

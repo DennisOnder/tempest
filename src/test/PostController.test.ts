@@ -1,8 +1,8 @@
 // tslint:disable: max-line-length
 import chai from "chai";
 import IPostRequest from "../interfaces/IPostRequest";
-import callApi from "./callApi";
-import getToken from "./getToken";
+import callApi from "../utils/callApi";
+import getToken from "../utils/getToken";
 
 const title = `A test post ${Math.floor(Math.random() * 10000)}`;
 const testPost: IPostRequest = {

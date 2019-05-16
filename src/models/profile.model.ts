@@ -1,6 +1,6 @@
 // tslint:disable
 import { Table, Column, Model, DataType } from "sequelize-typescript";
-import { Database } from "../db/Database";
+import { Database } from "../config/Database";
 
 @Table({ timestamps: true })
 export class Profile extends Model<Profile> {

@@ -1,36 +1,23 @@
 import dotenv from "dotenv";
 
+// Dotenv variables
 const CUSTOM_ENV_VARS = dotenv.config();
 
-const config = {
-  SERVER_PORT:
-    process.env.NODE_ENV === "dev"
-      ? CUSTOM_ENV_VARS.SERVER_PORT
-      : process.env.SERVER_PORT,
-  SECRET_OR_KEY:
-    process.env.NODE_ENV === "dev"
-      ? CUSTOM_ENV_VARS.SECRET_OR_KEY
-      : process.env.SECRET_OR_KEY,
-  DB_HOST:
-    process.env.NODE_ENV === "dev"
-      ? CUSTOM_ENV_VARS.DB_HOST
-      : process.env.DB_HOST,
-  DB_PORT:
-    process.env.NODE_ENV === "dev"
-      ? CUSTOM_ENV_VARS.DB_PORT
-      : process.env.DB_PORT,
-  DB_NAME:
-    process.env.NODE_ENV === "dev"
-      ? CUSTOM_ENV_VARS.DB_NAME
-      : process.env.DB_NAME,
-  DB_USER:
-    process.env.NODE_ENV === "dev"
-      ? CUSTOM_ENV_VARS.DB_USER
-      : process.env.DB_USER,
-  DB_PASSWORD:
-    process.env.NODE_ENV === "dev"
-      ? CUSTOM_ENV_VARS.DB_PASSWORD
-      : process.env.DB_PASSWORD
+// Check node environment
+let environment;
+
+process.env.NODE_ENV === "dev"
+  ? (environment = CUSTOM_ENV_VARS)
+  : (environment = process.env);
+
+let config = {
+  SERVER_PORT: environment.SERVER_PORT,
+  SECRET_OR_KEY: environment.SECRET_OR_KEY,
+  DB_HOST: environment.DB_HOST,
+  DB_PORT: environment.DB_PORT,
+  DB_NAME: environment.DB_NAME,
+  DB_USER: environment.DB_USER,
+  DB_PASSWORD: environment.DB_PASSWORD
 };
 
 export default config;
