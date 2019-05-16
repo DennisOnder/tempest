@@ -18,6 +18,6 @@
 
 ### Testing
 
-> The server has to be running before the tests can be ran
+> The server has to be running before the tests can be ran.
 
 ---
