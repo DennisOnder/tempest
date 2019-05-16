@@ -4,6 +4,7 @@ import IPostRequest from "../interfaces/IPostRequest";
 import callApi from "../utils/callApi";
 import getToken from "../utils/getToken";
 
+// Test posts
 const title = `A test post ${Math.floor(Math.random() * 10000)}`;
 const testPost: IPostRequest = {
   user_id: 1,
@@ -16,16 +17,6 @@ const testPost: IPostRequest = {
   ### Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.\n
   > Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.`
 };
-
-const responseKeys = [
-  "id",
-  "user_id",
-  "title",
-  "handle",
-  "body",
-  "createdAt",
-  "updatedAt"
-];
 
 const updatedTitle = `An updated test post ${Math.floor(
   Math.random() * 10000
@@ -42,10 +33,23 @@ const updatedTestPost: IPostRequest = {
 > Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.`
 };
 
+const responseKeys = [
+  "id",
+  "user_id",
+  "title",
+  "handle",
+  "body",
+  "createdAt",
+  "updatedAt"
+];
+
+// User token
+let token;
+beforeEach(async () => (token = await getToken()));
+
 describe("Post Controller", () => {
   describe("Create", () => {
     it("should return the new post object", async () => {
-      const token = await getToken();
       const response = await callApi("post", "/posts/create", testPost, token);
       chai.expect(response.status).to.eq(200);
       chai.expect(response.data).to.have.all.keys(...responseKeys);
@@ -70,7 +74,6 @@ describe("Post Controller", () => {
   });
   describe("Edit", () => {
     it("should return the edited post as an object", async () => {
-      const token = await getToken();
       const response = await callApi(
         "put",
         `/posts/edit/${testPost.handle}`,
@@ -83,7 +86,6 @@ describe("Post Controller", () => {
   });
   describe("Delete", () => {
     it("should return an object with the success prop", async () => {
-      const token = await getToken();
       const response = await callApi(
         "delete",
         `/posts/delete/${updatedTestPost.handle}`,

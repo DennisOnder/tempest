@@ -57,13 +57,13 @@ describe("Profile Controller", () => {
   describe("Get Profile", () => {
     it("should return the profile as an object", async () => {
       try {
-        const profile = await callApi(
+        const response = await callApi(
           "get",
           `/profile/get/${dummyProfile.handle}`
         );
-        chai.expect(profile.status).to.eq(200);
-        chai.expect(profile.data).to.be.an("object");
-        chai.expect(profile.data).to.have.all.keys(...responseKeys);
+        chai.expect(response.status).to.eq(200);
+        chai.expect(response.data).to.be.an("object");
+        chai.expect(response.data).to.have.all.keys(...responseKeys);
       } catch (error) {
         console.error(error);
       }
