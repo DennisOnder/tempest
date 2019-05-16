@@ -1,7 +1,7 @@
 // tslint:disable: variable-name
 import passport from "passport";
 import { ExtractJwt, Strategy } from "passport-jwt";
-import config from "./config";
+import config from "../config/config";
 import { User } from "../models/user.model";
 import { Application } from "express";
 
