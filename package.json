@@ -17,7 +17,7 @@
   "author": "Dennis Onder",
   "license": "ISC",
   "devDependencies": {
-    "@types/bcrypt": "^3.0.0",
+    "@types/bcryptjs": "^2.4.2",
     "@types/chai": "^4.1.7",
     "@types/express": "^4.16.1",
     "@types/jsonwebtoken": "^8.3.2",
@@ -36,7 +36,7 @@
     "typescript": "^3.4.4"
   },
   "dependencies": {
-    "bcrypt": "^3.0.6",
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
     "jsonwebtoken": "^8.5.1",

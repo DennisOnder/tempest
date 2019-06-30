@@ -3,7 +3,7 @@ import { Request, Response } from "express";
 import IRegistrationRequest from "../interfaces/IRegistrationRequest";
 import ILoginRequest from "../interfaces/ILoginRequest";
 import InputValidation from "../utils/InputValidation";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import { User } from "../models/user.model";
 import jsonwebtoken from "jsonwebtoken";
 import config from "../config/config";
